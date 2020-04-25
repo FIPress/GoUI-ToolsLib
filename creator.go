@@ -31,6 +31,11 @@ func CreateProject(name string, settings *Settings) string {
 		}
 	}
 
+	ok := false
+	settings.BinDir, ok = getBinDir()
+	if !ok {
+		return ""
+	}
 	src := filepath.Join(settings.BinDir, sampleDir)
 	err = fiputil.CopyDir(src, fullPath, nil)
 
